@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css"
+          integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <title>Cinema Tickets Booking</title>
+</head>
+
+<body>
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+<script>
+
+    $(document).ready(function getSeats() {
+        setTimeout(function() { location.reload(); }, 60000);
+        $.ajax({
+            type: 'GET',
+            url: 'http://localhost:8080/cinema/seats',
+        }).done(function (data) {
+            for (let i = 0; i < data.length; i++) {
+                const a = '#' + data[i];
+                $(a).attr('disabled', true).attr('checked', true)
+            }
+        });
+    })
+
+    function validate() {
+        const message = 'Choose at least one seat!';
+        const seats = document.getElementsByName("seat");
+        for (let i = 0; i < seats.length; i++) {
+            if (seats[i].checked === true && seats[i].disabled === false) {
+                popup();
+                return true;
+            }
+        }
+        alert(message);
+        return false;
+    }
+
+    function popup() {
+        window.open(
+            "booking.html",
+            "child",
+            "toolbar=no, scrollbars=no, resizable=yes, top=200, left=400, width=600, height=600, location=no, title=yes"
+        );
+    }
+
+</script>
+
+<div class="container" align="center">
+    <div class="row pt-3" style="display: table-row">
+        <h4>
+            Please choose your seats
+        </h4>
+        <form name="form" action="http://localhost:8080/cinema/seats" method="post">
+        <div class="ks-cboxtags">
+            <ul class="ks-cboxtags" style="display: table-row">
+                <li><input type="checkbox" id="11" name="seat" value="11"><label for="11"></label></li>
+                <li><input type="checkbox" id="12" name="seat" value="12"><label for="12"></label></li>
+                <li><input type="checkbox" id="13" name="seat" value="13"><label for="13"></label></li>
+                <li><input type="checkbox" id="14" name="seat" value="14"><label for="14"></label></li>
+                <li><input type="checkbox" id="15" name="seat" value="15"><label for="15"></label></li>
+                <li><input type="checkbox" id="16" name="seat" value="16"><label for="16"></label></li>
+                <li><input type="checkbox" id="17" name="seat" value="17"><label for="17"></label></li>
+                <li><input type="checkbox" id="18" name="seat" value="18"><label for="18"></label></li>
+            </ul>
+        </div>
+        <div class="ks-cboxtags">
+            <ul class="ks-cboxtags" style="display: table-row">
+                <li><input type="checkbox" id="21" name="seat" value="21"><label for="21"></label></li>
+                <li><input type="checkbox" id="22" name="seat" value="22"><label for="22"></label></li>
+                <li><input type="checkbox" id="23" name="seat" value="23"><label for="23"></label></li>
+                <li><input type="checkbox" id="24" name="seat" value="24"><label for="24"></label></li>
+                <li><input type="checkbox" id="25" name="seat" value="25"><label for="25"></label></li>
+                <li><input type="checkbox" id="26" name="seat" value="26"><label for="26"></label></li>
+                <li><input type="checkbox" id="27" name="seat" value="27"><label for="27"></label></li>
+                <li><input type="checkbox" id="28" name="seat" value="28"><label for="28"></label></li>
+            </ul>
+        </div>
+        <div class="ks-cboxtags">
+            <ul class="ks-cboxtags" style="display: table-row">
+                <li><input type="checkbox" id="31" name="seat" value="31"><label for="31"></label></li>
+                <li><input type="checkbox" id="32" name="seat" value="32"><label for="32"></label></li>
+                <li><input type="checkbox" id="33" name="seat" value="33"><label for="33"></label></li>
+                <li><input type="checkbox" id="34" name="seat" value="34"><label for="34"></label></li>
+                <li><input type="checkbox" id="35" name="seat" value="35"><label for="35"></label></li>
+                <li><input type="checkbox" id="36" name="seat" value="36"><label for="36"></label></li>
+                <li><input type="checkbox" id="37" name="seat" value="37"><label for="37"></label></li>
+                <li><input type="checkbox" id="38" name="seat" value="38"><label for="38"></label></li>
+            </ul>
+        </div>
+        <div class="ks-cboxtags">
+            <ul class="ks-cboxtags" style="display: table-row">
+                <li><input type="checkbox" id="41" name="seat" value="41"><label for="41"></label></li>
+                <li><input type="checkbox" id="42" name="seat" value="42"><label for="42"></label></li>
+                <li><input type="checkbox" id="43" name="seat" value="43"><label for="43"></label></li>
+                <li><input type="checkbox" id="44" name="seat" value="44"><label for="44"></label></li>
+                <li><input type="checkbox" id="45" name="seat" value="45"><label for="45"></label></li>
+                <li><input type="checkbox" id="46" name="seat" value="46"><label for="46"></label></li>
+                <li><input type="checkbox" id="47" name="seat" value="47"><label for="47"></label></li>
+                <li><input type="checkbox" id="48" name="seat" value="48"><label for="48"></label></li>
+            </ul>
+        </div>
+        <div class="ks-cboxtags">
+            <ul class="ks-cboxtags" style="display: table-row">
+                <li><input type="checkbox" id="51" name="seat" value="51"><label for="51"></label></li>
+                <li><input type="checkbox" id="52" name="seat" value="52"><label for="52"></label></li>
+                <li><input type="checkbox" id="53" name="seat" value="53"><label for="53"></label></li>
+                <li><input type="checkbox" id="54" name="seat" value="54"><label for="54"></label></li>
+                <li><input type="checkbox" id="55" name="seat" value="55"><label for="55"></label></li>
+                <li><input type="checkbox" id="56" name="seat" value="56"><label for="56"></label></li>
+                <li><input type="checkbox" id="57" name="seat" value="57"><label for="57"></label></li>
+                <li><input type="checkbox" id="58" name="seat" value="58"><label for="58"></label></li>
+            </ul>
+        </div>
+            <p></p>
+    <div class="form-group">
+        <button type="reset" class="btn btn-danger">Reset</button>
+        <button type="submit" class="btn btn-primary" onclick="validate()">Book</button>
+    </div>
+        </form>
+</div>
+</div>
+</body>
+</html>
