@@ -10,3 +10,5 @@ Technologies
 - PostgreSQL
 - JS (jQuery, AJAX), HTML, CSS
 - Maven
+
+![demo](https://github.com/s-manannikov/cinema/blob/master/demo/demo_booking.gif)
