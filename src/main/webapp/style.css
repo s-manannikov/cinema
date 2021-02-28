@@ -97,6 +97,16 @@ ul.ks-cboxtags li input[type="checkbox"] {
     transform: translateX(-50%) translateY(-50%);
 }
 
+.error {
+    position: absolute;
+    color: #ff0000;
+    top: 50%;
+    left: 50%;
+    -moz-transform: translateX(-50%) translateY(-50%);
+    -webkit-transform: translateX(-50%) translateY(-50%);
+    transform: translateX(-50%) translateY(-50%);
+}
+
 .close {
     position: absolute;
     top: 60%;

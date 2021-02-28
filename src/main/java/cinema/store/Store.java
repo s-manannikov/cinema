@@ -14,5 +14,5 @@ public interface Store {
 
     List<Integer> getOccupiedSeats();
 
-    void reserveSeats(Account account);
+    boolean reserveSeats(Account account);
 }

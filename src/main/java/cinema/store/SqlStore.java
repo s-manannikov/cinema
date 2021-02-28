@@ -82,21 +82,25 @@ public class SqlStore implements Store {
     }
 
     @Override
-    public void reserveSeats(Account account) {
+    public synchronized boolean reserveSeats(Account account) {
         List<Integer> seats = account.getSeats();
         String name = account.getName();
         String phone = account.getPhone();
-        for (Integer seat : seats) {
-            try (Connection cn = pool.getConnection();
-                 PreparedStatement ps = cn.prepareStatement(
-                         "update hall set occupied = 1 where id = ?")) {
-                ps.setInt(1, seat);
-                ps.execute();
-            } catch (Exception e) {
-                LOG.error(e.getMessage(), e);
+        boolean check = checkSeats(seats);
+        if (check) {
+            for (Integer seat : seats) {
+                try (Connection cn = pool.getConnection();
+                     PreparedStatement ps = cn.prepareStatement(
+                             "update hall set occupied = 1 where id = ?")) {
+                    ps.setInt(1, seat);
+                    ps.execute();
+                } catch (Exception e) {
+                    LOG.error(e.getMessage(), e);
+                }
+                addNewAccount(name, phone, seat);
             }
-            addNewAccount(name, phone, seat);
         }
+        return check;
     }
 
     private void addNewAccount(String name, String phone, int seat) {
@@ -114,5 +118,27 @@ public class SqlStore implements Store {
         } catch (Exception e) {
             LOG.error(e.getMessage(), e);
         }
+    }
+
+    private boolean checkSeats(List<Integer> seats) {
+        int i = 0;
+        for (Integer seat : seats) {
+            try (Connection cn = pool.getConnection();
+                 PreparedStatement ps = cn.prepareStatement("select occupied from hall where id = ?")
+            ) {
+                ps.setInt(1, seat);
+                try (ResultSet it = ps.executeQuery()) {
+                    if (it.next()) {
+                        if (it.getInt("occupied") == 1) {
+                            i++;
+                            break;
+                        }
+                    }
+                }
+            } catch (Exception e) {
+                LOG.error(e.getMessage(), e);
+            }
+        }
+        return i == 0;
     }
 }

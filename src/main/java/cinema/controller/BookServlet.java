@@ -36,8 +36,13 @@ public class BookServlet extends HttpServlet {
         String phone = req.getParameter("phone");
         account.setName(name);
         account.setPhone(phone);
-        STORE.reserveSeats(account);
+        boolean check = STORE.reserveSeats(account);
         STORE.deleteFromCache(session);
-        req.getRequestDispatcher("complete.html").forward(req, resp);
+        req.getSession().invalidate();
+        if (check) {
+            req.getRequestDispatcher("complete.html").forward(req, resp);
+        } else {
+            req.getRequestDispatcher("error.html").forward(req, resp);
+        }
     }
 }
